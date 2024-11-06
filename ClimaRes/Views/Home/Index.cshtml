@@ -1,0 +1,158 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null; //No se va a utilizar el Layout
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Estilo.css" />
+    <link href="~/font-awesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/solid.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/brands.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <header class="container mt-2">
+            <div class="row cabecera">
+                <div class="col-sm-12 col-md-4 text-center tamano">
+                    <img src="~/images/5904059.png" width="80" height="80" />
+                </div>
+                <div class="col-sm-12 col-md-4 text-center tamano tituloAPI">
+                    <p id="FontOswald">API Climatológica</p>
+                    <i class="fa-solid fa-sun me-3"></i><i class="fa-solid fa-cloud-rain me-3"></i><i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <div class="col-sm-12 col-md-4 tamano">
+                    <p></p>
+                </div>
+            </div>
+            <div class="row cabecera">
+                <div id="CiudadFecha" class="col-sm-4 col-md-4 text-center">
+                    <p id="Ciudad" class="mt-2">Ciudad</p>
+                    <p id="FechaHora">FechaHora</p>
+                </div>
+            </div>
+        </header>
+        <section class="container mt-2">
+            <div class="row mt-2 mb-2 CiudadClima">
+                <div class="col-sm-12 col-md-4 text-center">
+                </div>
+                <div class="col-sm-12 col-md-4 text-center">
+                    <span class="mt-2 text-white">Ciudad:&nbsp&nbsp<input type="text" id="ciudad" class="mt-2 mb-2" /></span>
+                    <b id="conexion"><p class="text-warning mt-1">Conectado a internet</p></b>
+                </div>
+                <div class="col-sm-12 col-md-4 text-center d-flex justify-content-center align-items-center">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 text-center">
+                    <button type="button" class="btn btn-outline-primary mb-2" onclick="DatosClimaControlador()">Clima</button>
+                    <br />
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-sm-6 col-md-6 GradientePronostico text-center mx-auto">
+                    <p class="Titulos border-bottom border-white">Pronóstico del clima</p>
+                    <br />
+                    <table class="table table-hover table-striped table-responsive">
+                        <tr>
+                            <th></th>
+                            <th>Valores</th>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td><b>Ciudad</b></td>
+                            <td>
+                                <p id="nombreciudad" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Descripción</b></td>
+                            <td>
+                                <p id="descripcion" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Imagen</b></td>
+                            <td>
+                                <img id="imagen" class="ColorDatos" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Temperatura</b></td>
+                            <td>
+                                <p id="temp" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Nubocidad</b></td>
+                            <td>
+                                <p id="nubocidad" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Viento</b></td>
+                            <td>
+                                <p id="viento" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Humedad</b></td>
+                            <td>
+                                <p id="humedad" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Amanecer</b></td>
+                            <td>
+                                <p id="amanecer" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Ocaso</b></td>
+                            <td>
+                                <p id="ocaso" class="ColorDatos"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/DatosController.js"></script>
+
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('/sw.js').then(res => {
+                console.log("Se registro service worker")
+            }).catch(Error => {
+                console.log("No se registro service worker")
+            })
+        } else {
+            console.log("El navegador no soporta service worker")
+        }
+    </script>
+
+    @*----TOAST--------------------------------------------------*@
+    <div aria-live="polite" aria-atomic="true">
+        <div class="toast-container top-50 start-50 translate-middle p-3">
+            <div class="toast align-items-center text-bg-primary border-white">
+                <div class="toast-body">
+                    <div id="msjnotif" class="text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Raw(ViewBag.MsjJavaScript)
+    @Html.Raw(ViewBag.MuestraToast)
+
+</body>
+</html>

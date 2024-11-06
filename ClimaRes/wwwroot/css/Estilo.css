@@ -1,0 +1,71 @@
+﻿.cabecera {
+    background-image: linear-gradient(180deg, #3c4141, #fff 100px, #fff);
+    border: 1px solid #ffff;
+}
+
+.tituloAPI {
+    background-image: linear-gradient(180deg, #3c4141, #fff 100px, #fff);
+}
+
+#Ciudad {
+    color: white;
+}
+
+#FechaHora {
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Segoe UI';
+    color: white;
+}
+
+#FontOswald {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 35px;
+    color: white;
+}
+
+.tamano p {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Segoe UI';
+    color: white;
+}
+
+/*section*/
+
+.CiudadClima {
+    border: 2px solid white;
+    background-color: #37586d;
+}
+
+.Titulos {
+    font-size: 14px;
+    color: white;
+}
+
+.GradientePronostico {
+    background-image: linear-gradient(to bottom left, #353737, #fff 400px);
+}
+
+.ColorDatos {
+    color: cadetblue;
+}
+
+input {
+    background-color: black;
+}
+
+.fa-sun {
+    color: blue;
+}
+
+.fa-cloud-rain {
+    color: white;
+}
+
+.fa-bolt-lightning {
+    color: dodgerblue;
+}

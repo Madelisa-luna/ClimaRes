@@ -13,4 +13,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
     //1. Mostrar las llamadas al servidor
     console.log(e.request.url)
+
+    //2. Requiere que las llamadas al servidor las haga el service worker
+    e.respondWith(fetch(e.request.url))
 });
